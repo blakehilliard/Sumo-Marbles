@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +20,9 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public string currPlayerName;
-    private List<Score> highScores = new List<Score>();
+    private List<Score> highScores;
     private const int maxScores = 10;
+    private string saveFile;
 
     public List<Score> GetHighScores()
     {
@@ -49,6 +51,14 @@ public class DataManager : MonoBehaviour
         {
             highScores.RemoveAt(highScores.Count - 1);
         }
+
+        SaveHighScores();
+    }
+
+    [System.Serializable]
+    class SaveData
+    {
+        public List<Score> HighScores;
     }
 
     private void Awake()
@@ -61,15 +71,37 @@ public class DataManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        saveFile = Application.persistentDataPath + "/highscores.json";
         LoadHighScores();
+    }
+
+    private void SaveHighScores()
+    {
+        SaveData data = new SaveData();
+        data.HighScores = highScores;
+
+        string json = JsonUtility.ToJson(data);
+
+        File.WriteAllText(saveFile, json);
     }
 
     private void LoadHighScores()
     {
-        highScores.Add(new Score("Omar", 50));
-        highScores.Add(new Score("Cedric", 40));
-        highScores.Add(new Score("Jon", 30));
-        highScores.Add(new Score("Juan", 20));
-        highScores.Add(new Score("Ikey", 10));
+        if (File.Exists(saveFile))
+        {
+            // TODO: Handle errors and fixing up data as needed
+            string json = File.ReadAllText(saveFile);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            highScores = data.HighScores;
+        }
+        else
+        {
+            highScores = new List<Score>();
+            highScores.Add(new Score("Omar", 50));
+            highScores.Add(new Score("Cedric", 40));
+            highScores.Add(new Score("Jon", 30));
+            highScores.Add(new Score("Juan", 20));
+            highScores.Add(new Score("Ikey", 10));
+        }
     }
 }
