@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
         if (transform.position.y < -10)
         {
-            gameManager.gameOver = true;
+            gameManager.SetGameOver();
         }
     }
 

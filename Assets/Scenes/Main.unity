@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
+  scoreKeeper: {fileID: 863224852}
 --- !u!4 &672175111
 Transform:
   m_ObjectHideFlags: 0

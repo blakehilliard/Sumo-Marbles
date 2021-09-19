@@ -19,10 +19,39 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     private List<Score> highScores = new List<Score>();
+    private const int maxScores = 10;
 
     public List<Score> GetHighScores()
     {
         return highScores;
+    }
+
+    public void AddNewScore(Score score)
+    {
+        Debug.Log("AddNewScore: " + score.name + " " + score.num);
+        bool added = false;
+        for (int idx = 0; idx < highScores.Count; idx++)
+        {
+            if (score.num >= highScores[idx].num)
+            {
+                Debug.Log("Insert score at " + idx);
+                highScores.Insert(idx, score);
+                added = true;
+                break;
+            }
+        }
+
+        if (!added && highScores.Count < maxScores)
+        {
+            Debug.Log("Insert score at end");
+            highScores.Add(score);
+        }
+
+        while (highScores.Count > maxScores)
+        {
+            Debug.Log("Remove last high score");
+            highScores.RemoveAt(highScores.Count - 1);
+        }
     }
 
     private void Awake()

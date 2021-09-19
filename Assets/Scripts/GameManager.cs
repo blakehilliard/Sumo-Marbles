@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool gameOver = false;
+    [SerializeField] private ScoreKeeper scoreKeeper;
 
     // Start is called before the first frame update
     void Start()
@@ -16,5 +17,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetGameOver()
+    {
+        if (!gameOver)
+        {
+            DataManager.Instance.AddNewScore(new Score("Name", scoreKeeper.score));
+        }
+        gameOver = true;
     }
 }
