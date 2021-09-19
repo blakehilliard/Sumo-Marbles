@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     {
         if (!gameOver)
         {
-            DataManager.Instance.AddNewScore(new Score("Name", scoreKeeper.score));
+            Score scoreObj = new Score(DataManager.Instance.currPlayerName, scoreKeeper.score);
+            DataManager.Instance.AddNewScore(scoreObj);
         }
         gameOver = true;
     }

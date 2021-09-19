@@ -976,6 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f592af26f0a7349adf20d5a510f22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currPlayerName: 
 --- !u!4 &1617256258
 Transform:
   m_ObjectHideFlags: 0
@@ -1025,7 +1026,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -122, y: -111}
+  m_AnchoredPosition: {x: -145, y: -111}
   m_SizeDelta: {x: 240, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1679340699
@@ -1059,7 +1060,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: High Scores
 --- !u!222 &1679340700

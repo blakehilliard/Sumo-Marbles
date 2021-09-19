@@ -25,6 +25,7 @@ public class MenuUI : MonoBehaviour
 
     public void StartGame()
     {
+        DataManager.Instance.currPlayerName = playerNameText.text;
         SceneManager.LoadScene(1);
     }
 

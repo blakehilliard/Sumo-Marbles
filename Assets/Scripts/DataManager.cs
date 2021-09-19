@@ -18,6 +18,7 @@ public class Score
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
+    public string currPlayerName;
     private List<Score> highScores = new List<Score>();
     private const int maxScores = 10;
 
@@ -28,13 +29,11 @@ public class DataManager : MonoBehaviour
 
     public void AddNewScore(Score score)
     {
-        Debug.Log("AddNewScore: " + score.name + " " + score.num);
         bool added = false;
         for (int idx = 0; idx < highScores.Count; idx++)
         {
             if (score.num >= highScores[idx].num)
             {
-                Debug.Log("Insert score at " + idx);
                 highScores.Insert(idx, score);
                 added = true;
                 break;
@@ -43,13 +42,11 @@ public class DataManager : MonoBehaviour
 
         if (!added && highScores.Count < maxScores)
         {
-            Debug.Log("Insert score at end");
             highScores.Add(score);
         }
 
         while (highScores.Count > maxScores)
         {
-            Debug.Log("Remove last high score");
             highScores.RemoveAt(highScores.Count - 1);
         }
     }
